@@ -8,7 +8,6 @@ use serde::Serialize;
 use thiserror::Error;
 
 use crate::from_str_deserialize_impl;
-use crate::galaxy::StarClass::Y;
 use crate::modules::ship::{
     ArmorModule, ArmorModuleError, InternalModule, InternalType, ModuleClass, ModuleClassError,
 };

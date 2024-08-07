@@ -1,7 +1,7 @@
 pub mod planet_species_entry;
 mod signal_counts;
 
-use std::collections::{HashMap, HashSet};
+use std::collections::{HashSet};
 
 use crate::exobiology::{SpawnSource, TargetPlanet, TargetSystem};
 use crate::exploration::{CodexEntry, PlanetarySignalType};

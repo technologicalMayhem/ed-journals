@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use crate::civilization::{Engineer, EngineerError};
+use crate::civilization::{Engineer};
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 #[serde(rename_all = "PascalCase", untagged)]

@@ -1,7 +1,7 @@
 use std::fmt::{Display, Formatter};
 use serde::Serialize;
 use thiserror::Error;
-use crate::{from_str_deserialize_impl, try_from_deserialize_impl};
+use crate::try_from_deserialize_impl;
 
 #[derive(Debug, Serialize, Clone, PartialEq)]
 pub enum Engineer {
