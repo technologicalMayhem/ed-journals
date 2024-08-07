@@ -138,7 +138,6 @@ impl CommanderState {
                 }
             },
 
-            LogEventContent::CarrierJump(_)
             | LogEventContent::CarrierBuy(_)
             | LogEventContent::CarrierJumpRequest(_)
             | LogEventContent::CarrierDecommission(_)
