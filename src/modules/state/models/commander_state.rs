@@ -44,7 +44,7 @@ impl CommanderState {
             LogEventContent::Scan(event) => {
                 self.current_exploration_data.push(event.clone());
             },
-            LogEventContent::Died(event) => {
+            LogEventContent::Died(_event) => {
                 self.current_exploration_data.clear();
             },
             LogEventContent::Rank(ranks) => {
