@@ -2,7 +2,7 @@ use std::fmt::{Display, Formatter};
 
 use serde::{Deserialize, Serialize};
 
-use crate::modules::materials::Material;
+use crate::{materials::MaterialGroup, modules::materials::Material};
 
 /// The type of material, either Raw, Manufactured, or Encoded.
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
@@ -181,6 +181,38 @@ impl From<&Material> for MaterialCategory {
             Material::Unknown(value) => {
                 MaterialCategory::Unknown(format!("Unknown material: '{}'", value))
             }
+        }
+    }
+}
+
+impl From<&MaterialGroup> for MaterialCategory {
+    fn from(value: &MaterialGroup) -> Self {
+        match value {
+            MaterialGroup::RawMaterials1
+            | MaterialGroup::RawMaterials2
+            | MaterialGroup::RawMaterials3
+            | MaterialGroup::RawMaterials4
+            | MaterialGroup::RawMaterials5
+            | MaterialGroup::RawMaterials6
+            | MaterialGroup::RawMaterials7 => MaterialCategory::Raw,
+
+            MaterialGroup::Chemical
+            | MaterialGroup::Thermic
+            | MaterialGroup::Heat
+            | MaterialGroup::Conductive
+            | MaterialGroup::MechanicalComponents
+            | MaterialGroup::Capacitors
+            | MaterialGroup::Shielding
+            | MaterialGroup::Composite
+            | MaterialGroup::Crystal
+            | MaterialGroup::Alloys => MaterialCategory::Manufactured,
+
+            MaterialGroup::EmissionData
+            | MaterialGroup::WakeScans
+            | MaterialGroup::ShieldData
+            | MaterialGroup::EncryptionFiles
+            | MaterialGroup::DataArchives
+            | MaterialGroup::EncodedFirmware => MaterialCategory::Encoded,
         }
     }
 }

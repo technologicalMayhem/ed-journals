@@ -5,7 +5,7 @@ use serde::Serialize;
 use thiserror::Error;
 
 use crate::from_str_deserialize_impl;
-use crate::materials::MaterialGrade;
+use crate::materials::{MaterialGrade, MaterialGroup};
 use crate::modules::materials::MaterialCategory;
 
 #[derive(Debug, Serialize, Clone, PartialEq, Eq, Hash)]
@@ -339,7 +339,11 @@ impl Material {
         self.into()
     }
 
-    pub fn category(&self) -> Option<MaterialCategory> {
+    pub fn category(&self) -> MaterialCategory {
+        self.into()
+    }
+
+    pub fn group(&self) -> Option<MaterialGroup> {
         self.try_into().ok()
     }
 }

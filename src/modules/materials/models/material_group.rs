@@ -3,7 +3,7 @@ use std::fmt::{Display, Formatter};
 use serde::Serialize;
 use strum::EnumIter;
 
-use crate::modules::materials::Material;
+use crate::{materials::MaterialCategory, modules::materials::Material};
 
 #[derive(Debug, Serialize, EnumIter)]
 pub enum MaterialGroup {
@@ -200,6 +200,18 @@ impl MaterialGroup {
                 Material::ModifiedEmbeddedFirmware,
             ],
         }
+    }
+
+    pub fn is_raw(&self) -> bool {
+        matches!(self.into(), MaterialCategory::Raw)
+    }
+
+    pub fn is_manufactured(&self) -> bool {
+        matches!(self.into(), MaterialCategory::Manufactured)
+    }
+
+    pub fn is_encoded(&self) -> bool {
+        matches!(self.into(), MaterialCategory::Encoded)
     }
 }
 
