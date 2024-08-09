@@ -338,6 +338,10 @@ impl Material {
     pub fn grade(&self) -> MaterialGrade {
         self.into()
     }
+
+    pub fn category(&self) -> Option<MaterialCategory> {
+        self.try_into().ok()
+    }
 }
 
 #[derive(Debug, Error)]

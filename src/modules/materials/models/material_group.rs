@@ -203,6 +203,143 @@ impl MaterialGroup {
     }
 }
 
+impl TryFrom<&Material> for MaterialGroup {
+    type Error = ();
+
+    fn try_from(value: &Material) -> Result<Self,()> {
+        match value {
+            // Raw
+            Material::Carbon | Material::Vanadium | Material::Niobium | Material::Yttrium => {
+                Ok(MaterialGroup::RawMaterials1)
+            }
+
+            Material::Phosphorus
+            | Material::Chromium
+            | Material::Molybdenum
+            | Material::Technetium => Ok(MaterialGroup::RawMaterials2),
+
+            Material::Sulphur | Material::Manganese | Material::Cadmium | Material::Ruthenium => {
+                Ok(MaterialGroup::RawMaterials3)
+            }
+
+            Material::Iron | Material::Zinc | Material::Tin | Material::Selenium => {
+                Ok(MaterialGroup::RawMaterials4)
+            }
+
+            Material::Nickel | Material::Germanium | Material::Tungsten | Material::Tellurium => {
+                Ok(MaterialGroup::RawMaterials5)
+            }
+
+            Material::Rhenium | Material::Arsenic | Material::Mercury | Material::Polonium => {
+                Ok(MaterialGroup::RawMaterials6)
+            }
+            Material::Lead | Material::Zirconium | Material::Boron | Material::Antimony => {
+                Ok(MaterialGroup::RawMaterials7)
+            }
+
+            // Manufactured
+            Material::ChemicalStorageUnits
+            | Material::ChemicalProcessors
+            | Material::ChemicalDistillery
+            | Material::ChemicalManipulators
+            | Material::PharmaceuticalIsolators => Ok(MaterialGroup::Chemical),
+
+            Material::TemperedAlloys
+            | Material::HeatResistantCeramics
+            | Material::PrecipitatedAlloys
+            | Material::ThermicAlloys
+            | Material::MilitaryGradeAlloys => Ok(MaterialGroup::Thermic),
+
+            Material::HeatConductionWiring
+            | Material::HeatDispersionPlate
+            | Material::HeatExchangers
+            | Material::HeatVanes
+            | Material::ProtoHeatRadiators => Ok(MaterialGroup::Heat),
+
+            Material::BasicConductors
+            | Material::ConductiveComponents
+            | Material::ConductiveCeramics
+            | Material::ConductivePolymers
+            | Material::BiotechConductors => Ok(MaterialGroup::Conductive),
+
+            Material::MechanicalScrap
+            | Material::MechanicalEquipment
+            | Material::MechanicalComponents
+            | Material::ConfigurableComponents
+            | Material::ImprovisedComponents => Ok(MaterialGroup::MechanicalComponents),
+
+            Material::GridResistors
+            | Material::HybridCapacitors
+            | Material::ElectrochemicalArrays
+            | Material::PolymerCapacitors
+            | Material::MilitarySupercapacitors => Ok(MaterialGroup::Capacitors),
+
+            Material::WornShieldEmitters
+            | Material::ShieldEmitters
+            | Material::ShieldingSensors
+            | Material::CompoundShielding
+            | Material::ImperialShielding => Ok(MaterialGroup::Shielding),
+
+            Material::CompactComposites
+            | Material::FilamentComposites
+            | Material::HighDensityComposites
+            | Material::ProprietaryComposites
+            | Material::CoreDynamicsComposites => Ok(MaterialGroup::Composite),
+
+            Material::CrystalShards
+            | Material::FlawedFocusCrystals
+            | Material::FocusCrystals
+            | Material::RefinedFocusCrystals
+            | Material::ExquisiteFocusCrystals => Ok(MaterialGroup::Crystal),
+
+            Material::SalvagedAlloys
+            | Material::GalvanisingAlloys
+            | Material::PhaseAlloys
+            | Material::ProtoLightAlloys
+            | Material::ProtoRadiolicAlloys => Ok(MaterialGroup::Alloys),
+
+            // Encoded
+            Material::ExceptionScrambledEmissionData
+            | Material::IrregularEmissionData
+            | Material::UnexpectedEmissionData
+            | Material::DecodedEmissionData
+            | Material::AbnormalCompactEmissionData => Ok(MaterialGroup::EmissionData),
+
+            Material::AtypicalDisruptedWakeEchoes
+            | Material::AnomalousFSDTelemetry
+            | Material::StrangeWakeSolutions
+            | Material::EccentricHyperspaceTrajectories
+            | Material::DataminedWakeExceptions => Ok(MaterialGroup::WakeScans),
+
+            Material::DistortedShieldCycleRecordings
+            | Material::InconsistentShieldSoakAnalysis
+            | Material::UntypicalShieldScans
+            | Material::AberrantShieldPatternAnalysis
+            | Material::PeculiarShieldFrequencyData => Ok(MaterialGroup::ShieldData),
+
+            Material::UnusualEncryptedFiles
+            | Material::TaggedEncryptionCodes
+            | Material::OpenSymmetricKeys
+            | Material::AtypicalEncryptionArchives
+            | Material::AdaptiveEncryptorsCapture => Ok(MaterialGroup::EncryptionFiles),
+
+            Material::AnomalousBulkScanData
+            | Material::UnidentifiedScanArchives
+            | Material::ClassifiedScanDatabanks
+            | Material::DivergentScanData
+            | Material::ClassifiedScanFragment => Ok(MaterialGroup::DataArchives),
+
+            Material::SpecializedLegacyFirmware
+            | Material::ModifiedConsumerFirmware
+            | Material::CrackedIndustrialFirmware
+            | Material::SecurityFirmwarePatch
+            | Material::ModifiedEmbeddedFirmware => Ok(MaterialGroup::EncodedFirmware),
+            
+            _ => Err(())
+        }
+    }
+}
+
 impl Display for MaterialGroup {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         write!(
